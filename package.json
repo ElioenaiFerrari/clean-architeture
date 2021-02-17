@@ -1,0 +1,33 @@
+{
+  "name": "clean-architeture-ddd-solid",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ElioenaiFerrari/clean-architeture-ddd-solid",
+  "author": "elioenaiferrari <elioenaiferrari@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^26.0.20",
+    "@types/module-alias": "^2.0.0",
+    "@types/nodemon": "^1.19.0",
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.7",
+    "ts-jest": "^26.5.1",
+    "ts-node-dev": "^1.1.1",
+    "typescript": "^4.1.5"
+  },
+  "scripts": {
+    "dev": "NODE_ENV=development tsnd --transpile-only --respawn --watch .env.development --ignore-watch node_modules --ignore-watch build src/main/",
+    "test": "jest"
+  },
+  "_moduleAliases": {
+    "@domain": "src/domain",
+    "@app": "src/app",
+    "@presentation": "src/presentation",
+    "@infra": "src/infra",
+    "@main": "src/main",
+    "@shared": "src/shared"
+  },
+  "dependencies": {
+    "module-alias": "^2.2.2"
+  }
+}

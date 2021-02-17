@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "ES2020",
+    "module": "CommonJS",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "rootDir": "src",
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "moduleResolution": "node",
+    "paths": {
+      "@domain/*": ["src/domain/*"],
+      "@app/*": ["src/app/*"],
+      "@presentation/*": ["src/presentation/*"],
+      "@infra/*": ["src/infra/*"],
+      "@main/*": ["src/main/*"],
+      "@shared/*": ["src/shared/*"]
+    }
+  },
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"],
+  "include": ["src/**/*.ts"]
+}
