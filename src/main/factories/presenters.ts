@@ -1,12 +1,9 @@
-import { MongoAnalyzesRepository } from '@/app/repositories/mongo/analyzes';
-import { ActionSystemService } from '@/app/services/action-system';
-import { ActionSystemPresenter } from '@/infra/presenters/action-system';
+import { SignupInteractor } from '@app/interactors/auth/signup';
+import { SignupPresenter } from '@presentation/presenters/signup';
+import { PresenterProtocol } from '@presentation/protocols/presenter';
 
-export class PresentersFactory {
-  static makeDecisionsPresenter(): any {
-    const analyzesRepository = new MongoAnalyzesRepository();
-    const actionSystemService = new ActionSystemService(analyzesRepository);
+export const makeSignupPresenter = (): PresenterProtocol => {
+  const signupInteractor = new SignupInteractor();
 
-    return new ActionSystemPresenter(actionSystemService);
-  }
-}
+  return new SignupPresenter(signupInteractor);
+};
