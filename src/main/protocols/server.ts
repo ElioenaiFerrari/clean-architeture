@@ -6,6 +6,6 @@ export interface ServerParamsDTO {
 export interface ServerProtocol<T = any> {
   middlewares(): void;
   routes(): void;
-  providers(): void;
+  providers(): Promise<void>;
   start(params: ServerParamsDTO): void;
 }

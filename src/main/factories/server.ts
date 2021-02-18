@@ -1,9 +1,8 @@
-import http from 'http';
-import { ServerProtocol } from '@main/protocols/server';
+import { MongoGateway } from '@infra/database/mongo';
 import { ExpressServer } from '@main/config/express-server';
 
-export class ServerFactory {
-  static makeExpressServer(): ServerProtocol<http.Server> {
-    return new ExpressServer();
-  }
-}
+export const makeExpressServer = (): ExpressServer => {
+  const databaseGateway = new MongoGateway('mongodb://localhost:27017');
+
+  return new ExpressServer(databaseGateway);
+};

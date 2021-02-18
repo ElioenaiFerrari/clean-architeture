@@ -1,9 +1,9 @@
 import { PresenterProtocol } from '@presentation/protocols/presenter';
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 
 export const expressRouterAdapter = (presenter: PresenterProtocol) => {
-  return async (req: Request, res: Response, next: NextFunction) => {
-    const response = await presenter.handle(req.body);
+  return async (req: Request, res: Response) => {
+    const response = await presenter.handle(req);
 
     return res.status(response.status).json(response.data);
   };

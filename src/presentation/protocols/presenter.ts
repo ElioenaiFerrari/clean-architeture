@@ -1,5 +1,5 @@
 import { HttpResponseProtocol } from './http-response';
 
-export interface PresenterProtocol {
-  handle(params: any): Promise<HttpResponseProtocol>;
+export interface PresenterProtocol<T = any> {
+  handle(request: T): Promise<HttpResponseProtocol>;
 }
