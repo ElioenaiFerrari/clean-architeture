@@ -1,9 +1,9 @@
 import 'dotenv/config';
 import dotenv from 'dotenv';
-import { Either, left, right } from '@/shared/result/either';
-import { EnvNotFoundError } from '@/shared/errors/env-not-found';
+import { Either, left, right } from '@shared/result/either';
+import { EnvNotFoundError } from '@shared/errors/env-not-found';
 
-dotenv.config({ path: `${__dirname}/../../../.env.${process.env.NODE_ENV}` });
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 export class Env {
   static get(
