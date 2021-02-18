@@ -28,14 +28,14 @@ export class ExpressServer implements ServerProtocol<http.Server> {
     // this.io = socketio(this.server);
   }
 
-  middlewares(): void {
+  async middlewares(): Promise<void> {
     this.app.use(cors({ origin: '*' }));
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(morgan('dev'));
   }
 
-  routes(): void {
+  async routes(): Promise<void> {
     routesConfig(this.app);
   }
 
@@ -50,10 +50,10 @@ export class ExpressServer implements ServerProtocol<http.Server> {
     );
   }
 
-  start(params: ServerParamsDTO): void {
-    this.middlewares();
-    this.providers();
-    this.routes();
+  async start(params: ServerParamsDTO): Promise<void> {
+    await this.middlewares();
+    await this.providers();
+    await this.routes();
 
     this.server.listen(params.port);
   }

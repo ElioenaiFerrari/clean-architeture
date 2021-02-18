@@ -8,9 +8,9 @@ const PORT = Env.get('PORT');
 const server = makeExpressServer();
 
 if (PORT.isRight()) {
-  server.start({ port: PORT.value });
-
-  Logger.success(`[SERVER ONLINE] http://localhost:${PORT.value}`);
+  server.start({ port: PORT.value }).then(() => {
+    Logger.success(`[SERVER ONLINE] http://localhost:${PORT.value}`);
+  });
 } else {
   Logger.error(`[SERVER ERROR] ${PORT.value.message}`);
 }
