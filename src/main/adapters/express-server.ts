@@ -6,7 +6,7 @@ import { ServerParamsDTO, ServerProtocol } from '@main/protocols/server';
 import { GatewayConnectProtocol } from '@app/protocols/gateway-connect';
 import { GatewayDisconnectProtocol } from '@app/protocols/gateway-disconnect';
 import mongoose, { ConnectionOptions } from 'mongoose';
-import { routesConfig } from '@main/config/routes';
+import { routesConfig } from '@main/router';
 // import socketio from 'socket.io';
 
 export class ExpressServer implements ServerProtocol<http.Server> {
