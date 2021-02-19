@@ -3,10 +3,10 @@ import cors from 'cors';
 import morgan from 'morgan';
 import http from 'http';
 import { ServerParamsDTO, ServerProtocol } from '@main/protocols/server';
-import { routesConfig } from './routes';
 import { GatewayConnectProtocol } from '@app/protocols/gateway-connect';
 import { GatewayDisconnectProtocol } from '@app/protocols/gateway-disconnect';
 import mongoose, { ConnectionOptions } from 'mongoose';
+import { routesConfig } from '@main/config/routes';
 // import socketio from 'socket.io';
 
 export class ExpressServer implements ServerProtocol<http.Server> {

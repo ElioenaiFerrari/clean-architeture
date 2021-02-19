@@ -5,7 +5,6 @@ import { BcryptHasherProvider } from '@infra/hasher/bcrypt-provider';
 import { V4PrimaryKeyProvider } from '@infra/id/v4-provider';
 import { SignupPresenter } from '@presentation/presenters/signup';
 import { PresenterProtocol } from '@presentation/protocols/presenter';
-import { Logger } from '@shared/utils/logger';
 import { server } from '..';
 
 export const makeSignupPresenter = (): PresenterProtocol => {
