@@ -1,36 +1,36 @@
-import { HttpResponse } from '@presentation/protocols/http-response';
+import { HttpResponseProtocol } from '@presentation/protocols/http-response';
 
-export const ok = (data: any): HttpResponse => ({
+export const ok = (data: any): HttpResponseProtocol => ({
   status: 200,
   data,
 });
 
-export const created = (data: any): HttpResponse => ({
+export const created = (data: any): HttpResponseProtocol => ({
   status: 201,
   data,
 });
 
-export const badRequest = (data: any): HttpResponse => ({
+export const badRequest = (data: any): HttpResponseProtocol => ({
   status: 400,
   data,
 });
 
-export const unauthorized = (data: any): HttpResponse => ({
+export const unauthorized = (data: any): HttpResponseProtocol => ({
   status: 401,
   data,
 });
 
-export const forbidden = (data: any): HttpResponse => ({
+export const forbidden = (data: any): HttpResponseProtocol => ({
   status: 403,
   data,
 });
 
-export const notFound = (data: any): HttpResponse => ({
+export const notFound = (data: any): HttpResponseProtocol => ({
   status: 404,
   data,
 });
 
-export const internalServerError = (data: any): HttpResponse => ({
+export const internalServerError = (data: any): HttpResponseProtocol => ({
   status: 500,
   data,
 });
