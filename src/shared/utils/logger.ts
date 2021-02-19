@@ -4,19 +4,19 @@ import { existsSync, mkdirSync, writeFileSync } from 'fs';
 type LogTypes = 'warning' | 'error' | 'success' | 'info';
 
 export class Logger {
-  static success(message: string) {
-    console.log(chalk.bgGreen.black(message));
+  static success(data: any) {
+    console.log(chalk.bgGreen.black(data));
   }
 
-  static error(message: string) {
-    console.log(chalk.bgRed.black(message));
+  static error(data: any) {
+    console.log(chalk.bgRed.black(data));
   }
 
-  static warning(message: string) {
-    console.log(chalk.bgYellow.black(message));
+  static warning(data: any) {
+    console.log(chalk.bgYellow.black(data));
   }
 
-  static info(message: string) {
-    console.log(chalk.bgCyan.black(message));
+  static info(data: any) {
+    console.log(chalk.bgCyan.black(data));
   }
 }
