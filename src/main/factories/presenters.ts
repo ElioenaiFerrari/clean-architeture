@@ -11,7 +11,7 @@ export const makeSignupPresenter = (): PresenterProtocol => {
   const { databaseConnection } = server;
 
   const userRepository = new MongoUserRepository(databaseConnection);
-  const hasherProvider = new BcryptHasherProvider();
+  const hasherProvider = new Argon2HasherProvider();
   const primaryKeyProvider = new V4PrimaryKeyProvider();
   const signupInteractor = new SignupInteractor(
     userRepository,

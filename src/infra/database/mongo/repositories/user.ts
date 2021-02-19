@@ -10,13 +10,12 @@ export class MongoUserRepository
 
   async create(params: CreateUserDTO): Promise<Either<Error[], any>> {
     const userCollection = this._connection.connection.collection('users');
-
     const user = await userCollection.insertOne(params);
 
     if (!user) {
       return left(user);
     }
 
-    return right(user);
+    return right(user.ops[0]);
   }
 }
