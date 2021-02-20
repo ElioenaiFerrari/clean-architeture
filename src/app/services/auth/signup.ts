@@ -12,19 +12,19 @@ import { Logger } from '@shared/utils/logger';
 export class SignupService
   implements ServiceProtocol<User, Error[] | Error, User> {
   constructor(
-    private readonly _createUserRepository: CreateRepositoryProtocol<
+    private readonly _userRepository: CreateRepositoryProtocol<
       User,
       Error[],
       any
-    >,
-    private readonly _findByEmailRepository: FindByEmailRepositoryProtocol,
+    > &
+      FindByEmailRepositoryProtocol,
     private readonly _hasherProvider: HasherProviderProtocol &
       HasherCompareProviderProtocol,
     private readonly _idProvider: PrimaryKeyProviderProtocol
   ) {}
 
   async execute(params: User): Promise<Either<Error[] | Error, User>> {
-    const userAlreadyExists = await this._findByEmailRepository.findByEmail(
+    const userAlreadyExists = await this._userRepository.findByEmail(
       params.email
     );
 
@@ -41,7 +41,7 @@ export class SignupService
     const id = await this._idProvider.make();
     const password = await this._hasherProvider.hash(params.password);
 
-    const userOrError = await this._createUserRepository.create({
+    const userOrError = await this._userRepository.create({
       ...params,
       id,
       password,

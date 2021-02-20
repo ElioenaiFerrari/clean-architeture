@@ -14,7 +14,6 @@ export const makeSignupPresenter = (): PresenterProtocol => {
   const primaryKeyProvider = new V4PrimaryKeyProvider();
   const signupInteractor = new SignupService(
     userRepository,
-    userRepository,
     hasherProvider,
     primaryKeyProvider
   );
