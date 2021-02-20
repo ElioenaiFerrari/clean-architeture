@@ -1,31 +1,36 @@
 import { CreateUserDTO } from '@app/dtos/create-user';
+import { SigninDTO } from '@app/dtos/signin';
 import { ServiceProtocol } from '@app/protocols/service';
+import { User } from '@domain/entities/user';
 import {
   badRequest,
   created,
   internalServerError,
+  ok,
 } from '@presentation/helpers/http-response';
 import { HttpResponseProtocol } from '@presentation/protocols/http-response';
 import { PresenterProtocol } from '@presentation/protocols/presenter';
 
-export class SignupPresenter implements PresenterProtocol {
+export class SigninPresenter implements PresenterProtocol {
   constructor(
-    private readonly _signupService: ServiceProtocol<
-      CreateUserDTO,
+    private readonly _signinService: ServiceProtocol<
+      SigninDTO,
       Error[] | Error,
-      any
+      string
     >
   ) {}
 
   async handle(request: any): Promise<HttpResponseProtocol> {
     try {
-      const userOrError = await this._signupService.execute(request.body);
+      const tokenOrError = await this._signinService.execute(request.body);
 
-      if (userOrError.isLeft()) {
-        return badRequest(userOrError.value);
+      if (tokenOrError.isLeft()) {
+        return badRequest(tokenOrError.value);
       }
 
-      return created(userOrError.value);
+      console.log(ok({ token: tokenOrError.value, createdAt: new Date() }));
+
+      return ok({ token: tokenOrError.value, createdAt: new Date() });
     } catch ({ message }) {
       return internalServerError({ message });
     }

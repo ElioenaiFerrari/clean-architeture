@@ -1,7 +1,9 @@
+import { SigninService } from '@app/services/auth/signin';
 import { SignupService } from '@app/services/auth/signup';
 import { MongoUserRepository } from '@infra/database/mongo/repositories/user';
 import { Argon2HasherProvider } from '@infra/hasher/argon2-provider';
 import { V4PrimaryKeyProvider } from '@infra/id/v4-provider';
+import { JwtTokenProvider } from '@infra/token/jwt';
 import { server } from '@main/index';
 import { SignupPresenter } from '@presentation/presenters/signup';
 import { PresenterProtocol } from '@presentation/protocols/presenter';
@@ -16,6 +18,22 @@ export const makeSignupPresenter = (): PresenterProtocol => {
     userRepository,
     hasherProvider,
     primaryKeyProvider
+  );
+
+  return new SignupPresenter(signupInteractor);
+};
+
+export const makeSigninPresenter = (): PresenterProtocol => {
+  const { databaseConnection } = server;
+
+  const userRepository = new MongoUserRepository(databaseConnection);
+  const hasherProvider = new Argon2HasherProvider();
+  const tokenProvider = new JwtTokenProvider('clean-architeture');
+
+  const signupInteractor = new SigninService(
+    userRepository,
+    hasherProvider,
+    tokenProvider
   );
 
   return new SignupPresenter(signupInteractor);

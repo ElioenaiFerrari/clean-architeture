@@ -14,7 +14,7 @@ export class MongoUserRepository
     const userCollection = this._connection.connection.collection('users');
     const user = await userCollection.findOne({ email });
 
-    if (user) {
+    if (!user) {
       return left(user);
     }
 

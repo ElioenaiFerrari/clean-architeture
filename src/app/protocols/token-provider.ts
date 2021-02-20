@@ -1,4 +1,4 @@
-export interface TokenProviderProtocol<T> {
-  encrypt(params: T): Promise<string>;
-  decrypt(token: string): Promise<T>;
+export interface TokenProviderProtocol<T = any> {
+  encode(params: T): Promise<string>;
+  decode(token: string): Promise<T>;
 }

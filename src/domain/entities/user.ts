@@ -13,7 +13,7 @@ export class User {
     public readonly password: string
   ) {}
 
-  public static create(params: Omit<User, 'id'>): Either<Error[], User> {
+  public static create(params: User): Either<Error[], User> {
     const usernameOrError = Username.create(params.username);
     const emailOrError = Email.create(params.email);
     const passwordOrError = Password.create(params.password);

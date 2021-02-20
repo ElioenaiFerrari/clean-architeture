@@ -1,4 +1,5 @@
-import { UserAlreadyExistsError } from '@app/errors/user-already-exists';
+import { CreateUserDTO } from '@app/dtos/create-user';
+import { AlreadyExistsError } from '@app/errors/already-exists';
 import { CreateRepositoryProtocol } from '@app/protocols/create-repository';
 import { FindByEmailRepositoryProtocol } from '@app/protocols/find-by-email-repository';
 import { HasherCompareProviderProtocol } from '@app/protocols/hasher-compare-provider';
@@ -7,10 +8,9 @@ import { PrimaryKeyProviderProtocol } from '@app/protocols/primary-key-provider'
 import { ServiceProtocol } from '@app/protocols/service';
 import { User } from '@domain/entities/user';
 import { Either, left, right } from '@shared/result/either';
-import { Logger } from '@shared/utils/logger';
 
 export class SignupService
-  implements ServiceProtocol<User, Error[] | Error, User> {
+  implements ServiceProtocol<CreateUserDTO, Error[] | Error, User> {
   constructor(
     private readonly _userRepository: CreateRepositoryProtocol<
       User,
@@ -23,13 +23,13 @@ export class SignupService
     private readonly _idProvider: PrimaryKeyProviderProtocol
   ) {}
 
-  async execute(params: User): Promise<Either<Error[] | Error, User>> {
+  async execute(params: CreateUserDTO): Promise<Either<Error[] | Error, User>> {
     const userAlreadyExists = await this._userRepository.findByEmail(
       params.email
     );
 
-    if (userAlreadyExists.isLeft()) {
-      return left(new UserAlreadyExistsError());
+    if (userAlreadyExists.isRight()) {
+      return left(new AlreadyExistsError('user already exists'));
     }
 
     const paramsOrError = User.create(params);
