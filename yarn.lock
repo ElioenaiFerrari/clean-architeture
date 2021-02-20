@@ -2234,11 +2234,6 @@ tsconfig@^7.0.0:
     strip-bom "^3.0.0"
     strip-json-comments "^2.0.0"
 
-tslint-import-control-rule@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/tslint-import-control-rule/-/tslint-import-control-rule-1.0.3.tgz#cc6c7b13e14deeaa15f60328677c72f87ee88da8"
-  integrity sha512-j0wMxraS4Ecd4XNW+1VRno37OAcYFfGBhjeNkGmh8wf+K8wxEtxiAYfa4pIOYxY4Fe6yZuE6/v0DUeEy56HFnA==
-
 type-fest@^0.8.1:
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"

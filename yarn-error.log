@@ -1,5 +1,5 @@
 Arguments: 
-  /home/elioenaiferrari/.asdf/installs/nodejs/14.15.4/bin/node /home/elioenaiferrari/.asdf/installs/nodejs/14.15.4/.npm/bin/yarn add @types/tslint-import-control-rule -D
+  /home/elioenaiferrari/.asdf/installs/nodejs/14.15.4/bin/node /home/elioenaiferrari/.asdf/installs/nodejs/14.15.4/.npm/bin/yarn add @types/eslint-plugin-restrict-imports -D
 
 PATH: 
   /home/elioenaiferrari/.asdf/installs/nodejs/14.15.4/bin:/home/elioenaiferrari/.asdf/installs/nodejs/14.15.4/.npm/bin:/home/elioenaiferrari/flutter/bin:/home/elioenaiferrari/.asdf/shims:/home/elioenaiferrari/.asdf/bin:/home/elioenaiferrari/flutter/bin:/home/elioenaiferrari/.zinit/polaris/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/home/elioenaiferrari/bin:/var/lib/snapd/snap/bin:/home/elioenaiferrari/bin
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2ftslint-import-control-rule: Not found
+  Error: https://registry.yarnpkg.com/@types%2feslint-plugin-restrict-imports: Not found
       at Request.params.callback [as _callback] (/home/elioenaiferrari/.asdf/installs/nodejs/14.15.4/.npm/lib/node_modules/yarn/lib/cli.js:66988:18)
       at Request.self.callback (/home/elioenaiferrari/.asdf/installs/nodejs/14.15.4/.npm/lib/node_modules/yarn/lib/cli.js:140662:22)
       at Request.emit (events.js:315:20)
@@ -41,6 +41,7 @@ npm manifest:
       "@types/cors": "^2.8.10",
       "@types/dotenv": "^8.2.0",
       "@types/express": "^4.17.11",
+      "@types/helmet": "^4.0.0",
       "@types/jsonwebtoken": "^8.5.0",
       "@types/module-alias": "^2.0.0",
       "@types/mongoose": "^5.10.3",
@@ -50,7 +51,6 @@ npm manifest:
       "@types/uuid": "^8.3.0",
       "nodemon": "^2.0.7",
       "ts-node-dev": "^1.1.1",
-      "tslint-import-control-rule": "^1.0.3",
       "typescript": "^4.1.5"
     },
     "scripts": {
@@ -71,16 +71,15 @@ npm manifest:
       "chalk": "^4.1.0",
       "cors": "^2.8.5",
       "dotenv": "^8.2.0",
+      "eslint-plugin-restrict-imports": "^0.0.3",
       "express": "^4.17.1",
+      "helmet": "^4.4.1",
       "jsonwebtoken": "^8.5.1",
       "module-alias": "^2.2.2",
       "mongoose": "^5.11.17",
       "morgan": "^1.10.0",
       "uniqid": "^5.3.0",
       "uuid": "^8.3.2"
-    },
-    "alias": {
-      "src": "./src"
     }
   }
 
@@ -180,6 +179,13 @@ Lockfile:
       "@types/express-serve-static-core" "^4.17.18"
       "@types/qs" "*"
       "@types/serve-static" "*"
+  
+  "@types/helmet@^4.0.0":
+    version "4.0.0"
+    resolved "https://registry.yarnpkg.com/@types/helmet/-/helmet-4.0.0.tgz#af7af46de26abe368b85360769ae9938bfb2318a"
+    integrity sha512-ONIn/nSNQA57yRge3oaMQESef/6QhoeX7llWeDli0UZIfz8TQMkfNPTXA8VnnyeA1WUjG2pGqdjEIueYonMdfQ==
+    dependencies:
+      helmet "*"
   
   "@types/jsonwebtoken@^8.5.0":
     version "8.5.0"
@@ -800,6 +806,13 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/escape-html/-/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
     integrity sha1-Aljq5NPQwJdN4cFpGI7wBR0dGYg=
   
+  eslint-plugin-restrict-imports@^0.0.3:
+    version "0.0.3"
+    resolved "https://registry.yarnpkg.com/eslint-plugin-restrict-imports/-/eslint-plugin-restrict-imports-0.0.3.tgz#3e6fe87215582072b93b36874720092eb86f7b4f"
+    integrity sha512-/KpPnsudIGYZNFvagnyULYyixuvvoqNaKPucCgsaOxTKuzPauoQJXAJ/AsJTjLt6U/K7NtjUJf7MtKAqSpozaw==
+    dependencies:
+      requireindex "~1.1.0"
+  
   etag@~1.8.1:
     version "1.8.1"
     resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
@@ -1008,6 +1021,11 @@ Lockfile:
     integrity sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==
     dependencies:
       function-bind "^1.1.1"
+  
+  helmet@*, helmet@^4.4.1:
+    version "4.4.1"
+    resolved "https://registry.yarnpkg.com/helmet/-/helmet-4.4.1.tgz#a17e1444d81d7a83ddc6e6f9bc6e2055b994efe7"
+    integrity sha512-G8tp0wUMI7i8wkMk2xLcEvESg5PiCitFMYgGRc/PwULB0RVhTP5GFdxOwvJwp9XVha8CuS8mnhmE8I/8dx/pbw==
   
   hosted-git-info@^2.1.4:
     version "2.8.8"
@@ -1937,6 +1955,11 @@ Lockfile:
       resolve-from "^2.0.0"
       semver "^5.1.0"
   
+  requireindex@~1.1.0:
+    version "1.1.0"
+    resolved "https://registry.yarnpkg.com/requireindex/-/requireindex-1.1.0.tgz#e5404b81557ef75db6e49c5a72004893fe03e162"
+    integrity sha1-5UBLgVV+91225JxacgBIk/4D4WI=
+  
   resolve-from@^2.0.0:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-2.0.0.tgz#9480ab20e94ffa1d9e80a804c7ea147611966b57"
@@ -2311,11 +2334,6 @@ Lockfile:
       "@types/strip-json-comments" "0.0.30"
       strip-bom "^3.0.0"
       strip-json-comments "^2.0.0"
-  
-  tslint-import-control-rule@^1.0.3:
-    version "1.0.3"
-    resolved "https://registry.yarnpkg.com/tslint-import-control-rule/-/tslint-import-control-rule-1.0.3.tgz#cc6c7b13e14deeaa15f60328677c72f87ee88da8"
-    integrity sha512-j0wMxraS4Ecd4XNW+1VRno37OAcYFfGBhjeNkGmh8wf+K8wxEtxiAYfa4pIOYxY4Fe6yZuE6/v0DUeEy56HFnA==
   
   type-fest@^0.8.1:
     version "0.8.1"
