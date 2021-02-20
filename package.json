@@ -26,6 +26,9 @@
   },
   "scripts": {
     "dev": "NODE_ENV=development tsnd --transpile-only --respawn --watch .env.development --ignore-watch node_modules --ignore-watch build src/main/",
+    "build": "rm -rf build && tsc -p .",
+    "start": "pm2 start ecosystem.config.js",
+    "deploy": "NODE_ENV=production yarn build && yarn start",
     "test": "jest"
   },
   "_moduleAliases": {
