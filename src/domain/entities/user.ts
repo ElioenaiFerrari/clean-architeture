@@ -7,10 +7,10 @@ import { Username } from './username';
 
 export class User {
   private constructor(
-    public readonly id: string | number,
     public readonly username: string,
     public readonly email: string,
-    public readonly password: string
+    public readonly password: string,
+    public readonly id?: string | number
   ) {}
 
   public static create(params: User): Either<Error[], User> {
@@ -30,6 +30,6 @@ export class User {
 
     const [username, email, password] = resultOrError.value;
 
-    return right(new User(params.id, username, email, password));
+    return right(new User(username, email, password, params.id));
   }
 }
