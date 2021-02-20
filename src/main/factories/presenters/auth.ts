@@ -1,11 +1,10 @@
-import { SignupInteractor } from '@app/interactors/auth/signup';
+import { SignupService } from '@app/services/auth/signup';
 import { MongoUserRepository } from '@infra/database/mongo/repositories/user';
 import { Argon2HasherProvider } from '@infra/hasher/argon2-provider';
-import { BcryptHasherProvider } from '@infra/hasher/bcrypt-provider';
 import { V4PrimaryKeyProvider } from '@infra/id/v4-provider';
+import { server } from '@main/index';
 import { SignupPresenter } from '@presentation/presenters/signup';
 import { PresenterProtocol } from '@presentation/protocols/presenter';
-import { server } from '..';
 
 export const makeSignupPresenter = (): PresenterProtocol => {
   const { databaseConnection } = server;
@@ -13,7 +12,8 @@ export const makeSignupPresenter = (): PresenterProtocol => {
   const userRepository = new MongoUserRepository(databaseConnection);
   const hasherProvider = new Argon2HasherProvider();
   const primaryKeyProvider = new V4PrimaryKeyProvider();
-  const signupInteractor = new SignupInteractor(
+  const signupInteractor = new SignupService(
+    userRepository,
     userRepository,
     hasherProvider,
     primaryKeyProvider

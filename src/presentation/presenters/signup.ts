@@ -1,26 +1,22 @@
 import { CreateUserDTO } from '@app/dtos/create-user';
-import { InteractorProtocol } from '@app/protocols/interactor';
+import { ServiceProtocol } from '@app/protocols/service';
+import { User } from '@domain/entities/user';
 import {
   badRequest,
   created,
   internalServerError,
-  ok,
 } from '@presentation/helpers/http-response';
 import { HttpResponseProtocol } from '@presentation/protocols/http-response';
 import { PresenterProtocol } from '@presentation/protocols/presenter';
 
 export class SignupPresenter implements PresenterProtocol {
   constructor(
-    private readonly _signupInteractor: InteractorProtocol<
-      CreateUserDTO,
-      Error[],
-      any
-    >
+    private readonly _signupService: ServiceProtocol<User, Error[] | Error, any>
   ) {}
 
   async handle(request: any): Promise<HttpResponseProtocol> {
     try {
-      const userOrError = await this._signupInteractor.execute(request.body);
+      const userOrError = await this._signupService.execute(request.body);
 
       if (userOrError.isLeft()) {
         return badRequest(userOrError.value);

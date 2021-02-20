@@ -1,7 +1,7 @@
 import 'module-alias/register';
 import { Env } from '@shared/utils/env';
-import { makeExpressServer } from './factories/server';
 import { Logger } from '@shared/utils/logger';
+import { makeExpressServer } from './factories/server';
 
 const PORT = Env.get('PORT');
 

@@ -14,13 +14,11 @@ export class User {
   ) {}
 
   public static create(params: Omit<User, 'id'>): Either<Error[], User> {
-    const idOrError = right(Math.round(Math.random() * 1000));
     const usernameOrError = Username.create(params.username);
     const emailOrError = Email.create(params.email);
     const passwordOrError = Password.create(params.password);
 
     const resultOrError = Result.combine([
-      idOrError,
       usernameOrError,
       emailOrError,
       passwordOrError,
@@ -30,8 +28,8 @@ export class User {
       return left(resultOrError.value);
     }
 
-    const [id, username, email, password] = resultOrError.value;
+    const [username, email, password] = resultOrError.value;
 
-    return right(new User(id, username, email, password));
+    return right(new User(params.id, username, email, password));
   }
 }

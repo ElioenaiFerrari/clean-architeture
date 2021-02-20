@@ -1,26 +1,43 @@
-import { CreateUserDTO } from '@app/dtos/create-user';
+import { UserAlreadyExistsError } from '@app/errors/user-already-exists';
 import { CreateRepositoryProtocol } from '@app/protocols/create-repository';
+import { FindByEmailRepositoryProtocol } from '@app/protocols/find-by-email-repository';
 import { HasherCompareProviderProtocol } from '@app/protocols/hasher-compare-provider';
 import { HasherProviderProtocol } from '@app/protocols/hasher-provider';
-import { InteractorProtocol } from '@app/protocols/interactor';
 import { PrimaryKeyProviderProtocol } from '@app/protocols/primary-key-provider';
+import { ServiceProtocol } from '@app/protocols/service';
 import { User } from '@domain/entities/user';
 import { Either, left, right } from '@shared/result/either';
+import { Logger } from '@shared/utils/logger';
 
-export class SignupInteractor
-  implements InteractorProtocol<CreateUserDTO, Error[], User> {
+export class SignupService
+  implements ServiceProtocol<User, Error[] | Error, User> {
   constructor(
     private readonly _createUserRepository: CreateRepositoryProtocol<
-      CreateUserDTO,
+      User,
       Error[],
-      User
+      any
     >,
+    private readonly _findByEmailRepository: FindByEmailRepositoryProtocol,
     private readonly _hasherProvider: HasherProviderProtocol &
       HasherCompareProviderProtocol,
     private readonly _idProvider: PrimaryKeyProviderProtocol
   ) {}
 
-  async execute(params: CreateUserDTO): Promise<Either<Error[], User>> {
+  async execute(params: User): Promise<Either<Error[] | Error, User>> {
+    const userAlreadyExists = await this._findByEmailRepository.findByEmail(
+      params.email
+    );
+
+    if (userAlreadyExists.isLeft()) {
+      return left(new UserAlreadyExistsError());
+    }
+
+    const paramsOrError = User.create(params);
+
+    if (paramsOrError.isLeft()) {
+      return left(paramsOrError.value);
+    }
+
     const id = await this._idProvider.make();
     const password = await this._hasherProvider.hash(params.password);
 
