@@ -91,6 +91,13 @@
     "@types/qs" "*"
     "@types/serve-static" "*"
 
+"@types/helmet@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/helmet/-/helmet-4.0.0.tgz#af7af46de26abe368b85360769ae9938bfb2318a"
+  integrity sha512-ONIn/nSNQA57yRge3oaMQESef/6QhoeX7llWeDli0UZIfz8TQMkfNPTXA8VnnyeA1WUjG2pGqdjEIueYonMdfQ==
+  dependencies:
+    helmet "*"
+
 "@types/jsonwebtoken@^8.5.0":
   version "8.5.0"
   resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-8.5.0.tgz#2531d5e300803aa63279b232c014acf780c981c5"
@@ -918,6 +925,11 @@ has@^1.0.3:
   integrity sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==
   dependencies:
     function-bind "^1.1.1"
+
+helmet@*, helmet@^4.4.1:
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/helmet/-/helmet-4.4.1.tgz#a17e1444d81d7a83ddc6e6f9bc6e2055b994efe7"
+  integrity sha512-G8tp0wUMI7i8wkMk2xLcEvESg5PiCitFMYgGRc/PwULB0RVhTP5GFdxOwvJwp9XVha8CuS8mnhmE8I/8dx/pbw==
 
 hosted-git-info@^2.1.4:
   version "2.8.8"
@@ -2221,6 +2233,11 @@ tsconfig@^7.0.0:
     "@types/strip-json-comments" "0.0.30"
     strip-bom "^3.0.0"
     strip-json-comments "^2.0.0"
+
+tslint-import-control-rule@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/tslint-import-control-rule/-/tslint-import-control-rule-1.0.3.tgz#cc6c7b13e14deeaa15f60328677c72f87ee88da8"
+  integrity sha512-j0wMxraS4Ecd4XNW+1VRno37OAcYFfGBhjeNkGmh8wf+K8wxEtxiAYfa4pIOYxY4Fe6yZuE6/v0DUeEy56HFnA==
 
 type-fest@^0.8.1:
   version "0.8.1"

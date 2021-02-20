@@ -1,0 +1,26 @@
+{
+  "rules": {
+    "import-control": [
+      true,
+      {
+        "rootDir": "src",
+        "whitelist": ["src/shared"],
+        "overrides": [
+          {
+            "rootDir": "src/infra",
+            "whitelist": ["src/app", "src/domain"]
+          },
+          {
+            "rootDir": "src/presentation",
+            "whitelist": ["src/app", "src/domain"]
+          },
+          {
+            "rootDir": "src/app",
+            "whitelist": ["src/domain"]
+          }
+        ]
+      }
+    ]
+  },
+  "rulesDirectory": ["node_modules/tslint-import-control-rule/src"]
+}

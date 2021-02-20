@@ -1,10 +1,7 @@
-import { CreateUserDTO } from '@app/dtos/create-user';
 import { SigninDTO } from '@app/dtos/signin';
 import { ServiceProtocol } from '@app/protocols/service';
-import { User } from '@domain/entities/user';
 import {
   badRequest,
-  created,
   internalServerError,
   ok,
 } from '@presentation/helpers/http-response';

@@ -1,7 +1,6 @@
 import { MaxLengthError } from '@domain/errors/max-length';
 import { MinLengthError } from '@domain/errors/min-length';
 import { Either, left, right } from '@shared/result/either';
-import { Logger } from '@shared/utils/logger';
 
 export class Password {
   private constructor(public readonly value: string) {}

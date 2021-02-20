@@ -1,5 +1,6 @@
 import express, { Express } from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
 import morgan from 'morgan';
 import http from 'http';
 import { ServerParamsDTO, ServerProtocol } from '@main/protocols/server';
@@ -30,6 +31,7 @@ export class ExpressServer implements ServerProtocol<http.Server> {
 
   async middlewares(): Promise<void> {
     this.app.use(cors({ origin: '*' }));
+    this.app.use(helmet());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(morgan('dev'));
