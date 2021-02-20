@@ -28,8 +28,6 @@ export class SigninPresenter implements PresenterProtocol {
         return badRequest(tokenOrError.value);
       }
 
-      console.log(ok({ token: tokenOrError.value, createdAt: new Date() }));
-
       return ok({ token: tokenOrError.value, createdAt: new Date() });
     } catch ({ message }) {
       return internalServerError({ message });
