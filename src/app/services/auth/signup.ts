@@ -12,7 +12,7 @@ import { Either, left, right } from '@shared/result/either';
 export class SignupService
   implements ServiceProtocol<CreateUserDTO, Error[] | Error, User> {
   constructor(
-    private readonly _userRepository: CreateRepositoryProtocol<
+    private readonly _usersRepository: CreateRepositoryProtocol<
       User,
       Error[],
       any
@@ -24,7 +24,7 @@ export class SignupService
   ) {}
 
   async execute(params: CreateUserDTO): Promise<Either<Error[] | Error, User>> {
-    const userAlreadyExists = await this._userRepository.findByEmail(
+    const userAlreadyExists = await this._usersRepository.findByEmail(
       params.email
     );
 
@@ -41,7 +41,7 @@ export class SignupService
     const id = await this._idProvider.make();
     const password = await this._hasherProvider.hash(params.password);
 
-    const userOrError = await this._userRepository.create({
+    const userOrError = await this._usersRepository.create({
       ...params,
       id,
       password,

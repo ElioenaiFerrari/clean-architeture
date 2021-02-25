@@ -5,10 +5,11 @@ import {
   created,
   internalServerError,
 } from '@presentation/helpers/http-response';
+import { HttpRequestProtocol } from '@presentation/protocols/http-request';
 import { HttpResponseProtocol } from '@presentation/protocols/http-response';
 import { PresenterProtocol } from '@presentation/protocols/presenter';
 
-export class SignupPresenter implements PresenterProtocol {
+export class SignupPresenter implements PresenterProtocol<HttpRequestProtocol> {
   constructor(
     private readonly _signupService: ServiceProtocol<
       CreateUserDTO,
@@ -17,7 +18,7 @@ export class SignupPresenter implements PresenterProtocol {
     >
   ) {}
 
-  async handle(request: any): Promise<HttpResponseProtocol> {
+  async handle(request: HttpRequestProtocol): Promise<HttpResponseProtocol> {
     try {
       const userOrError = await this._signupService.execute(request.body);
 

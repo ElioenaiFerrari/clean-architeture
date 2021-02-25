@@ -4,12 +4,21 @@ import { Either, left, right } from '@shared/result/either';
 import { Logger } from '@shared/utils/logger';
 import { CreateUserDTO } from '@app/dtos/create-user';
 import { FindByEmailRepositoryProtocol } from '@app/protocols/find-by-email-repository';
+import { FindAllRepositoryProtocol } from '@app/protocols/find-all-repository';
 
-export class MongoUserRepository
+export class MongoUsersRepository
   implements
     CreateRepositoryProtocol<CreateUserDTO, Error[], any>,
-    FindByEmailRepositoryProtocol {
+    FindByEmailRepositoryProtocol,
+    FindAllRepositoryProtocol {
   constructor(private readonly _connection: typeof mongoose) {}
+  async findAll(query: any): Promise<Either<any, any>> {
+    const userCollection = this._connection.connection.collection('users');
+    const users = await userCollection.find(query).toArray();
+
+    return right(users);
+  }
+
   async findByEmail(email: string): Promise<Either<any, any>> {
     const userCollection = this._connection.connection.collection('users');
     const user = await userCollection.findOne({ email });

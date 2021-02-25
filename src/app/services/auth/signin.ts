@@ -11,13 +11,13 @@ import { Either, left, right } from '@shared/result/either';
 export class SigninService
   implements ServiceProtocol<SigninDTO, Error[] | Error, string> {
   constructor(
-    private readonly _userRepository: FindByEmailRepositoryProtocol<any, User>,
+    private readonly _usersRepository: FindByEmailRepositoryProtocol<any, User>,
     private readonly _hasherProvider: HasherCompareProviderProtocol,
     private readonly _tokenProvider: TokenProviderProtocol<User>
   ) {}
 
   async execute(params: SigninDTO): Promise<Either<Error | Error[], string>> {
-    const userOrError = await this._userRepository.findByEmail(params.email);
+    const userOrError = await this._usersRepository.findByEmail(params.email);
 
     if (userOrError?.isLeft()) {
       return left(new NotFoundError('user not found'));
