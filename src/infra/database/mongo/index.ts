@@ -7,6 +7,8 @@ export class MongoGateway
   implements
     GatewayConnectProtocol<ConnectionOptions, typeof mongoose>,
     GatewayDisconnectProtocol {
+  private _connection?: typeof mongoose;
+
   constructor(private readonly _baseURL: string) {}
 
   async connect(
@@ -14,22 +16,23 @@ export class MongoGateway
     params: ConnectionOptions
   ): Promise<typeof mongoose> {
     const connectionUrl = `${this._baseURL}/${database}`;
-    const connection = await mongoose.connect(connectionUrl, params);
+    this._connection = await mongoose.connect(connectionUrl, params);
 
-    const isConnected = ({ connection }) => connection.readyState === 1;
+    const isConnected = () => this._connection?.connection.readyState === 1;
 
-    if (isConnected(connection)) {
+    if (isConnected()) {
       Logger.success(`[MONGO_CONNECTED] ${connectionUrl}`);
     } else {
-      if (connection.connection.readyState === 1) {
+      if (this._connection.connection.readyState === 1) {
         Logger.error(`[MONGO_ERROR]`);
       }
     }
 
-    return connection;
+    return this._connection;
   }
 
   async disconnect(params?: any): Promise<any> {
-    throw new Error('Method not implemented.');
+    await this._connection?.disconnect();
+    this._connection = undefined;
   }
 }

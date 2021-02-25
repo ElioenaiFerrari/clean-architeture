@@ -5,7 +5,13 @@ import {
   makeSignupPresenter,
 } from '@main/factories/presenters/auth';
 
-export default (router: Router): void => {
-  router.post('/auth/signup', expressRouterAdapter(makeSignupPresenter()));
-  router.post('/auth/signin', expressRouterAdapter(makeSigninPresenter()));
+export default async (router: Router): Promise<void> => {
+  router.post(
+    '/auth/signup',
+    expressRouterAdapter(await makeSignupPresenter())
+  );
+  router.post(
+    '/auth/signin',
+    expressRouterAdapter(await makeSigninPresenter())
+  );
 };

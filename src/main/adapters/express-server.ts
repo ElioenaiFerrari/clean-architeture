@@ -1,28 +1,19 @@
+import '@main/config/database';
 import express, { Express } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import http from 'http';
 import { ServerParamsDTO, ServerProtocol } from '@main/protocols/server';
-import { GatewayConnectProtocol } from '@app/protocols/gateway-connect';
-import { GatewayDisconnectProtocol } from '@app/protocols/gateway-disconnect';
-import mongoose, { ConnectionOptions } from 'mongoose';
 import { routesConfig } from '@main/router';
 // import socketio from 'socket.io';
 
 export class ExpressServer implements ServerProtocol<http.Server> {
   public readonly app: Express;
   public readonly server: http.Server;
-  public databaseConnection!: typeof mongoose;
   // public io: socketio.ExpressServer;
 
-  constructor(
-    private readonly _databaseGateway: GatewayConnectProtocol<
-      ConnectionOptions,
-      typeof mongoose
-    > &
-      GatewayDisconnectProtocol
-  ) {
+  constructor() {
     this.app = express();
     this.server = http.createServer(this.app);
 
@@ -41,16 +32,7 @@ export class ExpressServer implements ServerProtocol<http.Server> {
     routesConfig(this.app);
   }
 
-  async providers(): Promise<void> {
-    this.databaseConnection = await this._databaseGateway.connect(
-      'clean-architeture',
-      {
-        useCreateIndex: true,
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      }
-    );
-  }
+  async providers(): Promise<void> {}
 
   async start(params: ServerParamsDTO): Promise<void> {
     await this.middlewares();
