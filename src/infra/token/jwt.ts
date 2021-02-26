@@ -5,7 +5,7 @@ import { TokenDecodeProviderProtocol } from '@app/protocols/token-decode-provide
 
 export class JwtTokenProvider
   implements
-    TokenEncodeProviderProtocol<any>,
+    TokenEncodeProviderProtocol<User>,
     TokenDecodeProviderProtocol<any> {
   constructor(private readonly _secret: string) {}
 
