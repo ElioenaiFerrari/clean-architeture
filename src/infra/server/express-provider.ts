@@ -4,14 +4,14 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import http from 'http';
-import { ServerParamsDTO, ServerProtocol } from '@main/protocols/server';
 import { routesConfig } from '@main/router';
+import { ServerParamsDTO, ServerProtocol } from '@app/protocols/server';
 // import socketio from 'socket.io';
 
-export class ExpressServer implements ServerProtocol<http.Server> {
+export class ExpressServerProvider implements ServerProtocol<http.Server> {
   public readonly app: Express;
   public readonly server: http.Server;
-  // public io: socketio.ExpressServer;
+  // public io: socketio.ExpressServerProvider;
 
   constructor() {
     this.app = express();

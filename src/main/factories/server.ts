@@ -1,5 +1,6 @@
-import { ExpressServer } from '@main/adapters/express-server';
+import { ServerProtocol } from '@app/protocols/server';
+import { ExpressServerProvider } from '@infra/server/express-provider';
 
-export const makeExpressServer = (): ExpressServer => {
-  return new ExpressServer();
+export const makeExpressServer = (): ServerProtocol => {
+  return new ExpressServerProvider();
 };
