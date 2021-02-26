@@ -4,7 +4,8 @@ import { NotFoundError } from '@app/errors/not-found';
 import { FindByEmailRepositoryProtocol } from '@app/protocols/find-by-email-repository';
 import { HasherCompareProviderProtocol } from '@app/protocols/hasher-compare-provider';
 import { ServiceProtocol } from '@app/protocols/service';
-import { TokenProviderProtocol } from '@app/protocols/token-provider';
+import { TokenDecodeProviderProtocol } from '@app/protocols/token-decode-provider';
+import { TokenEncodeProviderProtocol } from '@app/protocols/token-encode-provider';
 import { User } from '@domain/entities/user';
 import { Either, left, right } from '@shared/result/either';
 
@@ -13,7 +14,8 @@ export class SigninService
   constructor(
     private readonly _usersRepository: FindByEmailRepositoryProtocol<any, User>,
     private readonly _hasherProvider: HasherCompareProviderProtocol,
-    private readonly _tokenProvider: TokenProviderProtocol<User>
+    private readonly _tokenProvider: TokenEncodeProviderProtocol<User> &
+      TokenEncodeProviderProtocol<User>
   ) {}
 
   async execute(params: SigninDTO): Promise<Either<Error | Error[], string>> {

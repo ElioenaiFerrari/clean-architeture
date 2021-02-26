@@ -1,8 +1,12 @@
 import jwt from 'jsonwebtoken';
-import { TokenProviderProtocol } from '@app/protocols/token-provider';
 import { User } from '@domain/entities/user';
+import { TokenEncodeProviderProtocol } from '@app/protocols/token-encode-provider';
+import { TokenDecodeProviderProtocol } from '@app/protocols/token-decode-provider';
 
-export class JwtTokenProvider implements TokenProviderProtocol<any> {
+export class JwtTokenProvider
+  implements
+    TokenEncodeProviderProtocol<any>,
+    TokenDecodeProviderProtocol<any> {
   constructor(private readonly _secret: string) {}
 
   async encode(params: User): Promise<string> {
