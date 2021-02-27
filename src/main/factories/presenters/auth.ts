@@ -3,7 +3,7 @@ import { SignupService } from '@app/services/auth/signup';
 import { MongoUsersRepository } from '@infra/database/mongo/repositories/users';
 import { Argon2HasherProvider } from '@infra/hasher/argon2-provider';
 import { V4PrimaryKeyProvider } from '@infra/id/v4-provider';
-import { JwtTokenProvider } from '@infra/token/jwt';
+import { JwtTokenProvider } from '@infra/token/jwt-provider';
 import { cleanArchitetureConnection } from '@main/config/database';
 import { SigninPresenter } from '@presentation/presenters/auth/signin';
 import { SignupPresenter } from '@presentation/presenters/auth/signup';
