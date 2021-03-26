@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { expressRouterAdapter } from '@main/adapters/express-router';
+import { expressRouterAdapter } from '@infra/router/express-router';
 import {
   makeSigninPresenter,
   makeSignupPresenter,

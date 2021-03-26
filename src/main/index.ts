@@ -14,4 +14,5 @@ if (PORT.isRight()) {
 } else {
   Logger.error(`[SERVER_ERROR] ${PORT.value.message}`);
 }
+
 export { server };
